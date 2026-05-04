@@ -73,6 +73,7 @@ const HeroSection = () => {
           align-items: center;
           justify-content: center;
           overflow: hidden;
+          isolation: isolate;
         }
 
         .hero-bg {
@@ -102,6 +103,7 @@ const HeroSection = () => {
         }
 
         .hero-content {
+          position: relative;
           text-align: center;
           color: #fff;
           max-width: 900px;
