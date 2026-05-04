@@ -82,7 +82,7 @@ const CinematicReveal = () => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: radial-gradient(circle at center, transparent 0%, #000 70%);
+          background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.6) 100%);
           z-index: 2;
         }
 
@@ -99,7 +99,7 @@ const CinematicReveal = () => {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          filter: brightness(0.2) contrast(1.2);
+          filter: brightness(0.4) contrast(1.1);
         }
 
         .light-sweep {

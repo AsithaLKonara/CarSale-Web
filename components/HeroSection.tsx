@@ -15,36 +15,36 @@ const HeroSection = () => {
   useEffect(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-    tl.fromTo(bgRef.current, 
-      { scale: 1.2, filter: 'blur(10px)' }, 
+    tl.fromTo(bgRef.current,
+      { scale: 1.2, filter: 'blur(10px)' },
       { scale: 1, filter: 'blur(0px)', duration: 2 }
     )
-    .fromTo(titleRef.current, 
-      { y: 100, opacity: 0 }, 
-      { y: 0, opacity: 1, duration: 1.2 }, 
-      '-=1.5'
-    )
-    .fromTo(subtitleRef.current, 
-      { y: 50, opacity: 0 }, 
-      { y: 0, opacity: 1, duration: 1 }, 
-      '-=1'
-    )
-    .fromTo(ctaRef.current, 
-      { scale: 0.8, opacity: 0 }, 
-      { scale: 1, opacity: 1, duration: 0.8 }, 
-      '-=0.8'
-    );
+      .fromTo(titleRef.current,
+        { y: 100, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.2 },
+        '-=1.5'
+      )
+      .fromTo(subtitleRef.current,
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1 },
+        '-=1'
+      )
+      .fromTo(ctaRef.current,
+        { scale: 0.8, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.8 },
+        '-=0.8'
+      );
   }, []);
 
   return (
     <section className="hero" ref={containerRef}>
       <div className="hero-bg" ref={bgRef}>
         <div className="overlay"></div>
-        <video 
-          autoPlay 
-          muted 
-          loop 
-          playsInline 
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
           className="bg-video"
         >
           <source src="/16815338-hd_1366_572_24fps.mp4" type="video/mp4" />
@@ -52,7 +52,7 @@ const HeroSection = () => {
       </div>
 
       <div className="hero-content">
-        <h1 ref={titleRef}>POWER MEETS <br/><span>PRECISION</span></h1>
+        <h1 ref={titleRef}>POWER MEETS <br /><span>PRECISION</span></h1>
         <p ref={subtitleRef}>Experience the pinnacle of automotive engineering with our curated selection of supercars.</p>
         <div className="cta-group" ref={ctaRef}>
           <Link href="/inventory">
@@ -88,7 +88,7 @@ const HeroSection = () => {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          filter: brightness(0.6);
+          filter: brightness(0.8) contrast(1.1);
         }
 
         .overlay {
@@ -97,7 +97,8 @@ const HeroSection = () => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: radial-gradient(circle at center, transparent 0%, rgba(5, 5, 5, 0.8) 100%);
+          background: rgba(0, 0, 0, 0.2);
+          z-index: 2;
         }
 
         .hero-content {
@@ -120,10 +121,12 @@ const HeroSection = () => {
         h1 span {
           display: block;
           color: transparent;
-          -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.8);
-          letter-spacing: 4px;
-          margin-top: 10px;
+          -webkit-text-stroke: 2px #fff;
+          letter-spacing: 12px;
+          margin-top: 20px;
           position: relative;
+          opacity: 1;
+          filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
         }
 
         h1 span::after {
@@ -132,10 +135,10 @@ const HeroSection = () => {
           left: 0;
           top: 0;
           z-index: -1;
-          color: var(--accent, #ff3e3e);
+          color: #fff;
           -webkit-text-stroke: 0;
           opacity: 0.1;
-          filter: blur(15px);
+          filter: blur(20px);
         }
 
         p {
