@@ -1,41 +1,48 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 const cars = [
   {
     name: 'Koenigsegg Jesko',
+    slug: 'koenigsegg-jesko',
     price: '$3,000,000',
     stats: { speed: '300+ MPH', power: '1600 HP' },
     image: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=800'
   },
   {
     name: 'Lamborghini Revuelto',
+    slug: 'lamborghini-revuelto',
     price: '$608,000',
     stats: { speed: '217 MPH', power: '1001 HP' },
     image: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=800'
   },
   {
     name: 'McLaren 750S',
+    slug: 'mclaren-750s',
     price: '$324,000',
     stats: { speed: '206 MPH', power: '740 HP' },
     image: 'https://images.unsplash.com/photo-1621135802920-133df287f89c?auto=format&fit=crop&q=80&w=800'
   },
   {
     name: 'Ford Mustang Dark Horse',
+    slug: 'mustang-dark-horse',
     price: '$60,000',
     stats: { speed: '168 MPH', power: '500 HP' },
     image: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=800'
   },
   {
     name: 'BMW M8 Competition',
+    slug: 'bmw-m8',
     price: '$138,000',
     stats: { speed: '190 MPH', power: '617 HP' },
     image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=800'
   },
   {
     name: 'Audi R8 V10',
+    slug: 'audi-r8',
     price: '$209,000',
     stats: { speed: '205 MPH', power: '602 HP' },
     image: 'https://images.unsplash.com/photo-1606148664166-7967a42ad5ad?auto=format&fit=crop&q=80&w=800'
@@ -78,9 +85,11 @@ const InventoryGrid = () => {
                     <span className="value">{car.stats.power}</span>
                   </div>
                 </div>
-                <button className="view-btn">
-                  View Details <ArrowRight size={16} />
-                </button>
+                <Link href={`/cars/${car.slug}`} className="view-link">
+                  <button className="view-btn">
+                    View Details <ArrowRight size={16} />
+                  </button>
+                </Link>
               </div>
             </div>
           ))}
@@ -226,6 +235,11 @@ const InventoryGrid = () => {
           font-size: 16px;
           font-weight: 600;
           color: #fff;
+        }
+
+        .view-link {
+          width: 100%;
+          text-decoration: none;
         }
 
         .view-btn {

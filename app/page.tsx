@@ -41,42 +41,6 @@ export default function Home() {
       <CinematicReveal />
       <FeatureShowcase />
       <InventoryGrid />
-      
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-content">
-            <div className="footer-logo">
-              ULTRA<span>DRIVE</span>
-            </div>
-            <p>© 2024 UltraDrive Automotive Group. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-
-      <style jsx>{`
-        .footer {
-          padding: 60px 0;
-          background: #050505;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
-          color: #71717a;
-          text-align: center;
-        }
-
-        .footer-logo {
-          font-size: 24px;
-          font-weight: 800;
-          color: #fff;
-          margin-bottom: 20px;
-        }
-
-        .footer-logo span {
-          color: var(--accent, #ff3e3e);
-        }
-
-        .footer p {
-          font-size: 14px;
-        }
-      `}</style>
     </div>
   );
 }
