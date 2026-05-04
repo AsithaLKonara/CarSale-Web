@@ -8,7 +8,10 @@ export default function PerformancePage() {
   return (
     <div className="page-wrapper">
       <section className="page-header">
-        <div className="container">
+        <video autoPlay muted loop playsInline className="header-video">
+          <source src="/12698077_1356_720_24fps.mp4" type="video/mp4" />
+        </video>
+        <div className="container header-content">
           <h1>ENGINEERING <span>EXCELLENCE</span></h1>
           <p>Where raw power meets surgical precision. Discover the technology that defines the modern supercar.</p>
         </div>
@@ -23,9 +26,27 @@ export default function PerformancePage() {
         }
 
         .page-header {
-          padding: 80px 0;
-          background: #0a0a0a;
+          position: relative;
+          padding: 160px 0;
+          background: #000;
           text-align: center;
+          overflow: hidden;
+        }
+
+        .header-video {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0.4;
+          z-index: 1;
+        }
+
+        .header-content {
+          position: relative;
+          z-index: 2;
         }
 
         .container {

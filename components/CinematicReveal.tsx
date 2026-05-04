@@ -46,8 +46,16 @@ const CinematicReveal = () => {
     <section className="cinematic-reveal" ref={containerRef}>
       <div className="dark-overlay"></div>
       
-      <div className="silhouette-wrapper" ref={silhouetteRef}>
-        <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=1400" alt="Supercar Silhouette" className="silhouette" />
+      <div className="video-wrapper" ref={silhouetteRef}>
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline 
+          className="reveal-video"
+        >
+          <source src="/12698153_1356_720_24fps.mp4" type="video/mp4" />
+        </video>
         <div className="light-sweep" ref={lightRef}></div>
       </div>
 
@@ -78,17 +86,20 @@ const CinematicReveal = () => {
           z-index: 2;
         }
 
-        .silhouette-wrapper {
-          position: relative;
-          width: 80%;
-          max-width: 1000px;
+        .video-wrapper {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
           z-index: 1;
         }
 
-        .silhouette {
+        .reveal-video {
           width: 100%;
-          height: auto;
-          filter: brightness(0.1) contrast(1.5);
+          height: 100%;
+          object-fit: cover;
+          filter: brightness(0.2) contrast(1.2);
         }
 
         .light-sweep {

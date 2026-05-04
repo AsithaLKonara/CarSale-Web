@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'next/navigation';
-import { ArrowLeft, Zap, Cpu, Shield, Gauge, Timer } from 'lucide-react';
+import { ArrowLeft, Zap, Cpu, Shield, Gauge, Timer, CheckCircle2, ChevronRight, ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
 
 const carData: Record<string, any> = {
@@ -11,32 +11,72 @@ const carData: Record<string, any> = {
     price: '$3,000,000',
     description: 'The Jesko is Koenigsegg’s all-new hypercar that was designed to be the ultimate track-focused car for the road. It features a redesigned 5.0 liter twin-turbo V8 engine and a revolutionary 9-speed Light Speed Transmission.',
     image: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=2000',
+    gallery: [
+      'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1621135802920-133df287f89c?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1603584173870-7f3ca935fb64?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1544636331-e268592033c2?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1525609004556-c46c7d6cf048?auto=format&fit=crop&q=80&w=800'
+    ],
     specs: [
       { label: 'Top Speed', value: '300+ MPH', icon: <Gauge /> },
       { label: 'Horsepower', value: '1600 HP', icon: <Zap /> },
       { label: '0-100 km/h', value: '2.5s', icon: <Timer /> },
       { label: 'Transmission', value: '9-Speed LST', icon: <Cpu /> }
-    ]
+    ],
+    fullSpecs: {
+      "Engine": "5.0L V8 Twin-Turbo",
+      "Power": "1280 hp (gasoline) / 1600 hp (E85)",
+      "Torque": "1500 Nm at 5100 rpm",
+      "Transmission": "9-speed Koenigsegg LST",
+      "Dimensions": "4610mm L x 2030mm W x 1210mm H",
+      "Weight": "1420 kg (Curb weight)",
+      "Brakes": "Ventilated Ceramic Discs",
+      "Tires": "Michelin Pilot Sport Cup 2"
+    }
   },
   'lamborghini-revuelto': {
     name: 'Lamborghini Revuelto',
     price: '$608,000',
     description: 'The first V12 hybrid plug-in HPEV (High Performance Electrified Vehicle) supercar. Defining a new paradigm in terms of performance, sportiness and driving pleasure.',
     image: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=2000',
+    gallery: [
+      'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1544636331-e268592033c2?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1621135802920-133df287f89c?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1525609004556-c46c7d6cf048?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1603584173870-7f3ca935fb64?auto=format&fit=crop&q=80&w=800'
+    ],
     specs: [
       { label: 'Top Speed', value: '217 MPH', icon: <Gauge /> },
       { label: 'Horsepower', value: '1001 HP', icon: <Zap /> },
       { label: '0-100 km/h', value: '2.5s', icon: <Timer /> },
       { label: 'Powertrain', value: 'V12 Hybrid', icon: <Cpu /> }
-    ]
-  },
-  // Add more cars as needed...
+    ],
+    fullSpecs: {
+      "Engine": "6.5L V12 + 3 Electric Motors",
+      "Power": "1001 CV / 1015 hp",
+      "Torque": "725 Nm (engine) + 350 Nm (electric)",
+      "Transmission": "8-speed dual-clutch",
+      "Dimensions": "4947mm L x 2266mm W x 1160mm H",
+      "Weight": "1772 kg",
+      "Brakes": "CCB+ (Carbon Ceramic Brakes Plus)",
+      "Tires": "Bridgestone Potenza Sport"
+    }
+  }
 };
 
 export default function CarDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
-  const car = carData[slug] || carData['koenigsegg-jesko']; // Fallback for demo
+  const car = carData[slug] || carData['koenigsegg-jesko'];
+  const [activeImg, setActiveImg] = useState(0);
 
   return (
     <div className="page-wrapper">
@@ -55,7 +95,7 @@ export default function CarDetailPage() {
         </div>
       </div>
 
-      <section className="specs-section">
+      <section className="specs-summary">
         <div className="container">
           <div className="specs-grid">
             {car.specs.map((spec: any, index: number) => (
@@ -69,28 +109,48 @@ export default function CarDetailPage() {
         </div>
       </section>
 
-      <section className="description-section">
+      <section className="gallery-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>VISUAL <span>STORY</span></h2>
+            <p>Every angle captured in stunning high definition.</p>
+          </div>
+          <div className="gallery-main">
+            <img src={car.gallery[activeImg]} alt="Main View" className="main-image" />
+            <div className="gallery-thumbs">
+              {car.gallery.map((img: string, i: number) => (
+                <div 
+                  key={i} 
+                  className={`thumb ${activeImg === i ? 'active' : ''}`}
+                  onClick={() => setActiveImg(i)}
+                >
+                  <img src={img} alt={`View ${i}`} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="details-section">
         <div className="container">
           <div className="content-grid">
             <div className="description">
               <h2>THE <span>UNRIVALED</span> MACHINE</h2>
               <p>{car.description}</p>
-              <button className="primary-btn">Book an Appointment</button>
+              <Link href="/book">
+                <button className="primary-btn">Book an Appointment</button>
+              </Link>
             </div>
-            <div className="tech-info">
-              <div className="info-item">
-                <Shield size={24} />
-                <div>
-                  <h4>5 Year Warranty</h4>
-                  <p>Comprehensive coverage for ultimate peace of mind.</p>
-                </div>
-              </div>
-              <div className="info-item">
-                <Cpu size={24} />
-                <div>
-                  <h4>Bespoke Engineering</h4>
-                  <p>Every component is handcrafted to your exact specifications.</p>
-                </div>
+            <div className="full-specs">
+              <h3>Technical Specifications</h3>
+              <div className="specs-list">
+                {Object.entries(car.fullSpecs).map(([key, value]) => (
+                  <div className="spec-item" key={key}>
+                    <span className="spec-key">{key}</span>
+                    <span className="spec-value">{value as string}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -100,11 +160,12 @@ export default function CarDetailPage() {
       <style jsx>{`
         .page-wrapper {
           padding-top: 0;
+          background: #050505;
         }
 
         .hero-section {
           position: relative;
-          height: 80vh;
+          height: 90vh;
           display: flex;
           align-items: center;
           overflow: hidden;
@@ -148,12 +209,17 @@ export default function CarDetailPage() {
           color: #fff;
           text-decoration: none;
           font-weight: 600;
-          z-index: 10;
+          z-index: 100; /* Fixed z-index */
           transition: transform 0.3s ease;
+          background: rgba(0,0,0,0.5);
+          padding: 10px 20px;
+          border-radius: 30px;
+          backdrop-filter: blur(5px);
         }
 
         .back-link:hover {
           transform: translateX(-5px);
+          background: var(--accent, #ff3e3e);
         }
 
         .hero-content h1 {
@@ -169,12 +235,12 @@ export default function CarDetailPage() {
           font-weight: 800;
         }
 
-        .specs-section {
+        .specs-summary {
           background: #050505;
           padding: 60px 0;
           margin-top: -80px;
           position: relative;
-          z-index: 5;
+          z-index: 50;
         }
 
         .specs-grid {
@@ -206,21 +272,71 @@ export default function CarDetailPage() {
           margin-bottom: 5px;
         }
 
-        .spec-card .label {
-          font-size: 12px;
-          color: #71717a;
-          text-transform: uppercase;
-          letter-spacing: 1px;
+        .gallery-section {
+          padding: 100px 0;
         }
 
-        .description-section {
+        .section-header {
+          text-align: center;
+          margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+          font-size: 40px;
+          color: #fff;
+        }
+
+        .section-header span {
+          color: var(--accent, #ff3e3e);
+        }
+
+        .gallery-main {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .main-image {
+          width: 100%;
+          height: 600px;
+          object-fit: cover;
+          border-radius: 12px;
+        }
+
+        .gallery-thumbs {
+          display: grid;
+          grid-template-columns: repeat(8, 1fr);
+          gap: 15px;
+        }
+
+        .thumb {
+          cursor: pointer;
+          border-radius: 6px;
+          overflow: hidden;
+          opacity: 0.5;
+          transition: all 0.3s ease;
+          border: 2px solid transparent;
+        }
+
+        .thumb.active, .thumb:hover {
+          opacity: 1;
+          border-color: var(--accent, #ff3e3e);
+        }
+
+        .thumb img {
+          width: 100%;
+          height: 80px;
+          object-fit: cover;
+        }
+
+        .details-section {
           padding: 100px 0;
-          background: #050505;
+          background: #0a0a0a;
         }
 
         .content-grid {
           display: grid;
-          grid-template-columns: 1.5fr 1fr;
+          grid-template-columns: 1fr 1fr;
           gap: 100px;
         }
 
@@ -252,28 +368,46 @@ export default function CarDetailPage() {
           text-transform: uppercase;
           letter-spacing: 1px;
           cursor: pointer;
+          transition: transform 0.3s ease;
         }
 
-        .tech-info {
+        .primary-btn:hover {
+          transform: translateY(-2px);
+          background: #e63535;
+        }
+
+        .full-specs h3 {
+          font-size: 24px;
+          color: #fff;
+          margin-bottom: 30px;
+          border-bottom: 1px solid var(--accent, #ff3e3e);
+          padding-bottom: 10px;
+          display: inline-block;
+        }
+
+        .specs-list {
           display: flex;
           flex-direction: column;
-          gap: 40px;
+          gap: 15px;
         }
 
-        .info-item {
+        .spec-item {
           display: flex;
-          gap: 20px;
+          justify-content: space-between;
+          padding: 15px 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .spec-key {
+          color: #71717a;
+          text-transform: uppercase;
+          font-size: 12px;
+          letter-spacing: 1px;
+        }
+
+        .spec-value {
           color: #fff;
-        }
-
-        .info-item h4 {
-          font-size: 18px;
-          margin-bottom: 10px;
-        }
-
-        .info-item p {
-          font-size: 14px;
-          color: #a1a1aa;
+          font-weight: 600;
         }
 
         @media (max-width: 1024px) {
@@ -283,6 +417,9 @@ export default function CarDetailPage() {
           .content-grid {
             grid-template-columns: 1fr;
             gap: 60px;
+          }
+          .gallery-thumbs {
+            grid-template-columns: repeat(4, 1fr);
           }
         }
       `}</style>

@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
+import Link from 'next/link';
 import gsap from 'gsap';
+
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -38,16 +40,27 @@ const HeroSection = () => {
     <section className="hero" ref={containerRef}>
       <div className="hero-bg" ref={bgRef}>
         <div className="overlay"></div>
-        {/* Placeholder for cinematic video or high-res image */}
-        <div className="bg-image"></div>
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline 
+          className="bg-video"
+        >
+          <source src="/16815338-hd_1366_572_24fps.mp4" type="video/mp4" />
+        </video>
       </div>
 
       <div className="hero-content">
         <h1 ref={titleRef}>POWER MEETS <br/><span>PRECISION</span></h1>
         <p ref={subtitleRef}>Experience the pinnacle of automotive engineering with our curated selection of supercars.</p>
         <div className="cta-group" ref={ctaRef}>
-          <button className="primary-btn">Explore Models</button>
-          <button className="secondary-btn">Book Test Drive</button>
+          <Link href="/inventory">
+            <button className="primary-btn">Explore Models</button>
+          </Link>
+          <Link href="/book">
+            <button className="secondary-btn">Book a Visit</button>
+          </Link>
         </div>
       </div>
 
@@ -71,12 +84,11 @@ const HeroSection = () => {
           z-index: -1;
         }
 
-        .bg-image {
+        .bg-video {
           width: 100%;
           height: 100%;
-          background: linear-gradient(rgba(5, 5, 5, 0.4), rgba(5, 5, 5, 0.4)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=2000');
-          background-size: cover;
-          background-position: center;
+          object-fit: cover;
+          filter: brightness(0.6);
         }
 
         .overlay {
@@ -97,17 +109,33 @@ const HeroSection = () => {
         }
 
         h1 {
-          font-size: clamp(48px, 8vw, 100px);
-          font-weight: 900;
-          line-height: 0.9;
+          font-size: clamp(48px, 8vw, 110px);
+          font-weight: 950;
+          line-height: 0.85;
           margin-bottom: 24px;
-          letter-spacing: -2px;
+          letter-spacing: -4px;
+          text-transform: uppercase;
         }
 
         h1 span {
-          color: var(--accent, #ff3e3e);
-          -webkit-text-stroke: 1px #fff;
+          display: block;
           color: transparent;
+          -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.8);
+          letter-spacing: 4px;
+          margin-top: 10px;
+          position: relative;
+        }
+
+        h1 span::after {
+          content: 'PRECISION';
+          position: absolute;
+          left: 0;
+          top: 0;
+          z-index: -1;
+          color: var(--accent, #ff3e3e);
+          -webkit-text-stroke: 0;
+          opacity: 0.1;
+          filter: blur(15px);
         }
 
         p {
