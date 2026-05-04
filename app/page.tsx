@@ -17,7 +17,7 @@ export default function Home() {
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1,
-      smoothTouch: false,
+      syncTouch: false,
       touchMultiplier: 2,
       infinite: false,
     });

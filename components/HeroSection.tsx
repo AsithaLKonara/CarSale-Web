@@ -88,7 +88,7 @@ const HeroSection = () => {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          filter: brightness(0.8) contrast(1.1);
+          filter: brightness(0.6);
         }
 
         .overlay {
@@ -97,7 +97,7 @@ const HeroSection = () => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(0, 0, 0, 0.2);
+          background: radial-gradient(circle at center, transparent 0%, rgba(5, 5, 5, 0.2) 100%);
           z-index: 2;
         }
 
@@ -122,11 +122,10 @@ const HeroSection = () => {
           display: block;
           color: transparent;
           -webkit-text-stroke: 2px #fff;
-          letter-spacing: 12px;
-          margin-top: 20px;
+          letter-spacing: 8px;
+          margin-top: 15px;
           position: relative;
-          opacity: 1;
-          filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+          opacity: 0.9;
         }
 
         h1 span::after {
@@ -137,8 +136,8 @@ const HeroSection = () => {
           z-index: -1;
           color: #fff;
           -webkit-text-stroke: 0;
-          opacity: 0.1;
-          filter: blur(20px);
+          opacity: 0.05;
+          filter: blur(10px);
         }
 
         p {
