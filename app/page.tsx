@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect } from 'react';
-import Lenis from '@studio-freight/lenis';
+import Lenis from 'lenis';
 import HeroSection from '@/components/HeroSection';
 import ScrollStory from '@/components/ScrollStory';
+import CinematicReveal from '@/components/CinematicReveal';
 import FeatureShowcase from '@/components/FeatureShowcase';
 import InventoryGrid from '@/components/InventoryGrid';
 
@@ -37,6 +38,7 @@ export default function Home() {
     <div>
       <HeroSection />
       <ScrollStory />
+      <CinematicReveal />
       <FeatureShowcase />
       <InventoryGrid />
       

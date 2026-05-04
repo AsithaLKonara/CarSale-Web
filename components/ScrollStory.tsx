@@ -64,7 +64,7 @@ const ScrollStory = () => {
       
       <div className="content-wrapper">
         <div className="car-reveal" ref={carRef}>
-          <img src="https://images.unsplash.com/photo-1544636331-e268592033c2?auto=format&fit=crop&q=80&w=1200" alt="Supercar" />
+          <img src="https://images.unsplash.com/photo-1621135802920-133df287f89c?auto=format&fit=crop&q=80&w=1200" alt="Supercar" />
         </div>
         
         <div className="text-content" ref={textRef}>

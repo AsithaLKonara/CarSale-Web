@@ -14,7 +14,7 @@ const cars = [
     name: 'Lamborghini Revuelto',
     price: '$608,000',
     stats: { speed: '217 MPH', power: '1001 HP' },
-    image: 'https://images.unsplash.com/photo-1544636331-e268592033c2?auto=format&fit=crop&q=80&w=800'
+    image: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=800'
   },
   {
     name: 'McLaren 750S',
@@ -26,7 +26,7 @@ const cars = [
     name: 'Ford Mustang Dark Horse',
     price: '$60,000',
     stats: { speed: '168 MPH', power: '500 HP' },
-    image: 'https://images.unsplash.com/photo-1584345604482-813583efc95d?auto=format&fit=crop&q=80&w=800'
+    image: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=800'
   },
   {
     name: 'BMW M8 Competition',

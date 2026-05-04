@@ -74,7 +74,7 @@ const HeroSection = () => {
         .bg-image {
           width: 100%;
           height: 100%;
-          background: linear-gradient(rgba(5, 5, 5, 0.4), rgba(5, 5, 5, 0.4)), url('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=2000');
+          background: linear-gradient(rgba(5, 5, 5, 0.4), rgba(5, 5, 5, 0.4)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=2000');
           background-size: cover;
           background-position: center;
         }
