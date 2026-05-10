@@ -1,0 +1,60 @@
+name: UltraDrive Fullstack CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  # 1. Backend Lint & Compilations Tests
+  backend-test:
+    name: Backend CI checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository source
+        uses: actions/checkout@v4
+
+      - name: Setup Node runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./backend
+        run: npm ci
+
+      - name: Generate Prisma Client
+        working-directory: ./backend
+        run: npx prisma generate
+
+      - name: Compile TypeScript transpilations
+        working-directory: ./backend
+        run: npm run build
+
+  # 2. Frontend Lint & Compilations Tests
+  frontend-test:
+    name: Frontend CI checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository source
+        uses: actions/checkout@v4
+
+      - name: Setup Node runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: Frontend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./Frontend
+        run: npm ci
+
+      - name: Compile Next.js build bundle
+        working-directory: ./Frontend
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
